@@ -11,6 +11,7 @@ public class Cleaning {
 	private ArrayList<Cluster> clusters;
 	double disThreshold,occRel;
 	boolean hasChanged;
+	boolean debug=false;
 	
 	
 	public Cleaning(ArrayList<String> input,double d,double e){
@@ -23,6 +24,8 @@ public class Cleaning {
 		for(int i=0;i<input.size();i++)
 			input.set(i, input.get(i).toUpperCase());
 	}
+	
+	
 	private void removeNonAlphaNumeric(){
 		for(int i=0;i<input.size();i++){
 			input.set(i,input.get(i).replaceAll("[^A-Za-z0-9]", ""));
@@ -34,7 +37,8 @@ public class Cleaning {
 		for(int i=0;i<input.size();i++){
 			clusters.add(new Cluster(input.get(i)));
 		}
-		System.out.println("Created clusters \n"+getOutput());
+		if(debug)
+			System.out.println("Created clusters \n"+getOutputString());
 	}
 	
 	private void sortClusters(){
@@ -43,7 +47,8 @@ public class Cleaning {
 		        return (cluster2.getFrequencyOfRep()-cluster1.getFrequencyOfRep()); // The order depends on the direction of sorting.
 		    }
 		});
-		System.out.println("After sorting \n"+getOutput());
+		if(debug)
+			System.out.println("After sorting \n"+getOutputString());
 
 	}
 	
@@ -66,13 +71,15 @@ public class Cleaning {
 				{
 					hasChanged=true;
 					clusters.get(i).merge(clusters.get(j));
-					System.out.println("Merged Cluster"+i+" and Cluster"+j+"\n");
+					if(debug)
+						System.out.println("Merged Cluster"+i+" and Cluster"+j+"\n");
 					clusters.remove(j);
 				
 				}
 			}
 		}
-		System.out.println("After Merging \n"+getOutput());
+		if(debug)
+			System.out.println("After Merging \n"+getOutputString());
 
 	}
 	
@@ -86,12 +93,14 @@ public class Cleaning {
 						 {
 						 	hasChanged=true;
 						 	clusters.add(new Cluster(key));
+						 	frequencies.remove(key);
 						 }
 						 
 				 }
 				
 			}
-		System.out.println("After cleaning \n"+getOutput());
+		if(debug)
+			System.out.println("After cleaning \n"+getOutputString());
 
 			
 		}
@@ -110,7 +119,11 @@ public class Cleaning {
 		}
 	}
 	
-	public String getOutput(){
+	public ArrayList<Cluster> getClusters(){
+		return clusters;
+	}
+	
+	public String getOutputString(){
 		String result="";
 		result+="Output :\n";
 		for(int i=0;i<clusters.size();i++){
