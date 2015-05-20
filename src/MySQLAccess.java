@@ -15,9 +15,9 @@ public class MySQLAccess {
   private Statement statement = null;
   private PreparedStatement preparedStatement = null;
   private ResultSet resultSet = null;
-  private String dbName,user,password;
+  private String server,dbName,user,password;
 
-  public void connnectDataBase(String dbName,String user,String password) throws Exception {
+  public void connnectDataBase(String server,String dbName,String user,String password) throws Exception {
     try {
       // This will load the MySQL driver, each DB has its own driver
       Class.forName("com.mysql.jdbc.Driver");
@@ -26,8 +26,8 @@ public class MySQLAccess {
 	  this.password=password;
       // Setup the connection with the DB
       connect = DriverManager
-          .getConnection("jdbc:mysql://localhost/"+dbName+"?"
-              + "user='"+user+"'");
+          .getConnection("jdbc:mysql://"+server+"/"+dbName+"?"
+              + "user="+user+"&password="+password+"");
               
       
     } catch (Exception e) {

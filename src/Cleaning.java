@@ -101,7 +101,6 @@ public class Cleaning {
 			}
 		if(debug)
 			System.out.println("After cleaning \n"+getOutputString());
-
 			
 		}
 	
