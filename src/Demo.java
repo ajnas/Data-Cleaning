@@ -48,12 +48,12 @@ class Demo {
       
         if(input==null)
         	return;
-        Cleaning cleaning=new Cleaning(input,disThreshold,1.0);
+        Cleaning cleaning=new Cleaning(input,disThreshold,occRel);
         cleaning.execute();
         
         dao.applyCleaning(cleaning.getClusters(),table,attribute);
         System.out.println(cleaning.getOutputString());
-        System.out.println("Number of distinct values after clening = "+cleaning.getClusters().size());
+        System.out.println("Number of distinct values after cleaning = "+cleaning.getClusters().size());
 
         
     }

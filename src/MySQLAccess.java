@@ -43,7 +43,6 @@ public class MySQLAccess {
 		statement = connect.createStatement();
 		resultSet = statement.executeQuery("select "+attribute+" from "+table);
 		while(resultSet.next()){
-			System.out.println(resultSet.getString(attribute));
 			values.add(resultSet.getString(attribute));
 			
 		}

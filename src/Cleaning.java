@@ -125,8 +125,8 @@ public class Cleaning {
 	}
 	
 	public String getOutputString(){
-		String result="";
-		result+="Output :\n";
+		String result="Output\n";
+		result+="Final  Clusters :\n";
 		for(int i=0;i<clusters.size();i++){
 			result+="Cluster "+(i+1)+"\n";
 			result+=clusters.get(i).toString();
