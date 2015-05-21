@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Map.Entry;
 
 
@@ -86,18 +88,18 @@ public class Cleaning {
 	private void cleanClusters(){
 		for(int i=0;i<clusters.size();i++){
 				HashMap<String,Integer> frequencies=clusters.get(i).getFrequencies();
-				for (Entry<String, Integer> entry : frequencies.entrySet())
-				 {
-					 String key=entry.getKey();
-					 if(Levenshtein.distance(key,clusters.get(i).getRep())>disThreshold)
-						 {
-						 	hasChanged=true;
-						 	clusters.add(new Cluster(key));
-						 	frequencies.remove(key);
-						 }
-						 
-				 }
-				
+				Iterator<Map.Entry<String,Integer>> iterator = frequencies.entrySet().iterator() ;
+		        while(iterator.hasNext()){
+		            String key=	iterator.next().getKey();
+		            if(Levenshtein.distance(key,clusters.get(i).getRep())>disThreshold)
+					 {
+					 	hasChanged=true;
+					 	clusters.add(new Cluster(key));
+					 	iterator.remove();
+					 }
+		           
+		        }
+			
 			}
 		if(debug)
 			System.out.println("After cleaning \n"+getOutputString());

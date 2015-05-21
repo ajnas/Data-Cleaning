@@ -29,6 +29,8 @@ class Demo {
          attribute = in.nextLine();
          System.out.println("Enter disThreshold Value");
          disThreshold = in.nextDouble();
+         System.out.println("Enter occRel Value");
+         occRel=in.nextDouble();
         MySQLAccess dao = new MySQLAccess();
         try {
 			dao.connnectDataBase(server,dbName,user,pass);
@@ -41,7 +43,7 @@ class Demo {
         
         
         ArrayList<String> input=dao.getValues(table,attribute);
-        System.out.println("Number of distinct values before cleaning = "+input.size());
+        
         
       
         if(input==null)
